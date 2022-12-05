@@ -23,7 +23,7 @@ const data = [
     name: "Bitcoin",
     rates: [
       { exchange: "Binance", rate: 12000000 },
-      { exchange: "Remitano", rate: 12000400 },
+      { exchange: "Remitano", rate: 12341895.29 },
       { exchange: "Kucoin", rate: 12000800 },
       { exchange: "Bitmama", rate: 12000000 },
     ],
@@ -32,7 +32,7 @@ const data = [
     name: "Ethereum",
     rates: [
       { exchange: "Binance", rate: 1200000 },
-      { exchange: "Remitano", rate: 1200040 },
+      { exchange: "Remitano", rate: 892224.15 },
       { exchange: "Kucoin", rate: 1200000 },
       { exchange: "Bitmama", rate: 1200000 },
     ],
@@ -50,7 +50,7 @@ const data = [
     name: "BUSD",
     rates: [
       { exchange: "Binance", rate: 760 },
-      { exchange: "Remitano", rate: 750 },
+      { exchange: "Remitano", rate: 751 },
       { exchange: "Kucoin", rate: 760 },
       { exchange: "Bitmama", rate: 762 },
     ],
@@ -102,20 +102,14 @@ function MarketTable() {
 }
 
 function DataRow() {
-  const [coinData, setCoinData] = useState({
-    name: "Bitcoin",
-    rates: [
-      { exchange: "Binance", rate: 12000000 },
-      { exchange: "Remitano", rate: 12000400 },
-      { exchange: "Kucoin", rate: 12000800 },
-      { exchange: "Bitmama", rate: 12000000 },
-    ],
-  });
+  const [coinData, setCoinData] = useState(data[0]);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const handleClick = (coinData) => {
     onOpen();
+
     setCoinData(coinData);
-    console.log(coinData);
   };
   return (
     <>
@@ -136,10 +130,12 @@ function DataRow() {
                   .map(({ exchange, rate }, index) => {
                     let bg = "";
                     let color = "gray.700";
+                    let border = "1px solid green";
 
                     if (index === 0) {
                       bg = "green.500";
                       color = "gray.100";
+                      border = "none";
                     }
 
                     return (
@@ -152,13 +148,14 @@ function DataRow() {
                       >
                         <Box
                           textAlign={"center"}
-                          width={"100px"}
-                          border={"1px solid green"}
+                          width={"130px"}
+                          border={border}
                           color={color}
                           bg={bg}
                           borderRadius={"base"}
+                          py={"0.2rem"}
                         >
-                          <Text fontSize={"sm"}>
+                          <Text fontSize={"sm"} fontWeight={600}>
                             N
                             {rate
                               .toString()
